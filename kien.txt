@@ -1,0 +1,40 @@
+/*1*/
+select *
+from tblEmployee E,tblDepartment D
+where  e.depNum=d.depNum and d.depName like N'Phòng Phần mềm trong nước' 
+						 and e.empSalary> (select AVG(empSalary)
+						 	       		  from tblEmployee E,tblDepartment D
+						    			  where e.depNum=d.depNum and d.depName like N'Phòng Phần mềm nước ngoài')
+go
+/*4*/
+select *
+from tblEmployee
+where (empAddress like N'%Hà Nội') and (empSex='F')
+go
+/*5*/
+select *
+from tblProject p, tblDepartment d
+where p.depNum=d.depNum and d.depName like N'Phòng Dịch vụ chăm sóc khách hàng'
+go
+/*3*/
+select *
+from tblEmployee
+where year(getdate())-year(empStartdate)>5
+order by empStartdate
+go
+
+/*2*/
+select distinct e.empSSN as 'Mã nhân viên',e.empName as 'Tên nhân viên',sum(workHours) as 'Tổng số giờ'
+from tblWorksOn w join tblEmployee e on e.empSSN=w.empSSN
+group by e.empSSN,e.empName
+go
+
+/*kiểm tra bài 1*/
+select AVG(empSalary)
+from tblEmployee E,tblDepartment D
+where e.depNum=d.depNum and d.depName like N'Phòng Phần mềm nước ngoài'
+go
+
+select *
+from tblEmployee E,tblDepartment D
+where  e.depNum=d.depNum and d.depName like N'Phòng Phần mềm trong nước' 
